@@ -1,0 +1,60 @@
+<div class="page-holder w-100 d-flex flex-wrap">
+    <div class="page-holder w-100 h-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+            <section class="py-5">
+                <div class="row h-100">
+                    <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+                        <h4 class="mmb-3">Введите номер телефона абонента</h4>
+                        <form [formGroup]="form">
+                            <div class="input-group md-form form-lg form-2 pl-0">
+                                <input class="form-control py-1 form-control-lg" type="text" prefix="+994 " mask="00 000-00-00"
+                                       placeholder="Номер телефона" [showMaskTyped]="true" formControlName="phone">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary form-control-lg input-group-text"
+                                            [disabled]="!form.get('phone').valid" (click)="search()">
+                                        <mat-icon class="step">search</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+            <section class="animated slideInUp text-center">
+                <div class="panel mb-4 animated bounceInUp" [hidden]="!is_txs_loading && !is_txs_search_done">
+                    <div class="panel-heading">
+                        <h4 class="panel-title mb-3">Отчет по платежам</h4>
+                    </div>
+                    <div class="text-center" [hidden]="is_txs_search_done">
+                        <app-loading-indicator></app-loading-indicator>
+                    </div>
+                    <div class="panel-body" [hidden]="is_txs_loading">
+                        <app-grid-transactions [update_txs]="update_txs.asObservable()"
+                                               (txs_loaded)="txs_loaded()"
+                                               (txs_reload)="search()"
+                                               [phone]="phone">
+                        </app-grid-transactions>
+                    </div>
+                </div>
+            </section>
+            <section class="animated slideInUp text-center">
+                <div class="panel mb-4 animated bounceInUp" [hidden]="!is_subs_loading && !is_subs_search_done">
+                    <div class="panel-heading">
+                        <h4 class="panel-title mb-3">Отчет по подпискам</h4>
+                    </div>
+                    <div class="text-center" [hidden]="is_subs_search_done">
+                        <app-loading-indicator></app-loading-indicator>
+                    </div>
+                    <div class="panel-body" [hidden]="is_subs_loading">
+                        <app-grid-subscriptions [update_subs]="update_subs.asObservable()"
+                                                (subs_loaded)="subs_loaded()"
+                                                (subs_reload)="search()"
+                                                [phone]="phone">
+                        </app-grid-subscriptions>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="bg-light-box roundy section-stat">
+
+    <div class="rm-border pb-0 responsive-center card-header">
+        <h5 class="card-title-section">
+            <span class="style-icon text-success">
+                <mat-icon ng-class="font.theme" class="step" [color]="wsService.isConn ? '' : 'warn'"
+                          matRipple matRippleDisabled="true">
+                    {{ icon }}
+                </mat-icon>
+            </span>{{ title }}
+        </h5>
+    </div>
+
+    <div class="m-1">
+        <kendo-chart style="height: 350px;" [transitions]="false">
+            <kendo-chart-axis-defaults [majorGridLines]="{visible: false}">
+            </kendo-chart-axis-defaults>
+
+            <kendo-chart-y-axis>
+                <kendo-chart-y-axis-item [color]="color1" name="series1">
+                </kendo-chart-y-axis-item>
+
+                <kendo-chart-y-axis-item [color]="color2" name="series2">
+                </kendo-chart-y-axis-item>
+            </kendo-chart-y-axis>
+
+            <kendo-chart-x-axis>
+                <kendo-chart-x-axis-item type="date" baseUnit="hours" color="#929292"
+                                         [axisCrossingValue]="[series1[series1.length-1].time, 0]"
+                                         [max]="series1[series1.length-1].time"
+                                         [min]="series1[0].time" [labels]="{step: 2, skip: 1, content: convertDate}">
+                </kendo-chart-x-axis-item>
+            </kendo-chart-x-axis>
+
+            <kendo-chart-area background="transparent"></kendo-chart-area>
+
+            <kendo-chart-series>
+                <kendo-chart-series-item [line]="{ style: 'step' }" type="scatterLine" [data]="series1" [color]="color1"
+                                         [markers]="{visible: false}" [width]="1" yAxis="series1" yField="value" xField="time">
+                    <kendo-chart-series-item-tooltip>
+                        <ng-template kendoChartSeriesTooltipTemplate let-dataItem="dataItem">
+                            <b>{{ dataItem.time }}</b><br>
+                            {{ tooltip_title1 }}: <b>{{ dataItem.value }}</b><br>
+                        </ng-template>
+                    </kendo-chart-series-item-tooltip>
+                </kendo-chart-series-item>
+
+                <kendo-chart-series-item [line]="{ style: 'step' }" type="scatterLine" [data]="series2" [color]="color2"
+                                         [markers]="{visible: false}" [width]="1" yAxis="series2" yField="value" xField="time">
+                    <kendo-chart-series-item-tooltip>
+                        <ng-template kendoChartSeriesTooltipTemplate let-dataItem="dataItem">
+                            <b>{{ dataItem.time }}</b><br>
+                            {{ tooltip_title2 }}: <b>{{ dataItem.value }}</b><br>
+                        </ng-template>
+                    </kendo-chart-series-item-tooltip>
+                </kendo-chart-series-item>
+            </kendo-chart-series>
+        </kendo-chart>
+    </div>
+
+</div>

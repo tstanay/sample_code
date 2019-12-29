@@ -1,0 +1,170 @@
+<div class="page-holder w-100 d-flex flex-wrap">
+    <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-3">
+            <section class="py-3">
+
+                <div class="bg-light-box roundy section-stat w-100 mb-4">
+                    <div class="rm-border pb-0 responsive-center card-header">
+                        <h5><span class="style-icon"><mat-icon
+                            ng-class="font.theme"
+                            class="step ">touch_app</mat-icon></span> Опции
+                        </h5>
+                    </div>
+
+                    <div class="p-3">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-5 mb-3">
+                                <h5 class="mb-3 card-title">Мерчанты</h5>
+                                <div class="example-wrapper">
+                                    <kendo-multiselect
+                                        [data]="contractors"
+                                        [(ngModel)]="selected_contrs"
+                                        [textField]="'name'"
+                                        [valueField]="'id'"
+                                        (valueChange)="valueChange($event)"
+                                    >
+                                    </kendo-multiselect>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-7">
+                                <div class="row">
+                                    <div class="col-lg-12 col-xl-6 mb-4">
+                                        <h5 class="mb-3 card-title">Период</h5>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <input [matDatepicker]="fromPeriodDp" class="col-lg-8 col-sm-6 input-style" [(ngModel)]="from_period" style="font-size: 0.8rem;">
+                                                    <mat-datepicker-toggle [for]="fromPeriodDp"></mat-datepicker-toggle>
+                                                    <mat-datepicker #fromPeriodDp></mat-datepicker>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <input [matDatepicker]="toPeriodDp" class="col-lg-8 col-sm-6 input-style" [(ngModel)]="to_period" style="font-size: 0.8rem;">
+                                                    <mat-datepicker-toggle [for]="toPeriodDp"></mat-datepicker-toggle>
+                                                    <mat-datepicker #toPeriodDp></mat-datepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-xl-6 mb-2">
+                                        <h5 class="mb-3 card-title">Группировать</h5>
+                                        <ul class="pagination-block mb-0">
+                                            <li class="page-item-box"><a class="page-link-style" (click)="switch_period('day');" [class.active]="period == 'day'">День</a>
+                                            </li>
+                                            <li class="page-item-box"><a class="page-link-style" (click)="switch_period('week');" [class.active]="period == 'week'">Неделя</a>
+                                            </li>
+                                            <li class="page-item-box"><a class="page-link-style" (click)="switch_period('month');" [class.active]="period == 'month'">Месяц</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-xl-6">
+                                        <h5 class="mb-2 card-title">Отчеты</h5>
+                                        <ul class="pagination-block">
+                                            <li class="page-item-box">
+                                                <a class="page-link-style" (click)="switch_turnover('payments');" [class.active]="turnover == 'payments'">Платежи</a>
+                                            </li>
+                                            <li class="page-item-box">
+                                                <a class="page-link-style" (click)="switch_turnover('subscriptions');" [class.active]="turnover == 'subscriptions'">Подписки</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-12 col-xl-6">
+                                        <h5 class="mb-2 card-title">
+                                            Оператор</h5>
+                                        <ul class="pagination-block">
+                                            <li class="page-item-box"><a class="page-link-style" (click)="switch_operator('bakcellmfs');" [class.active]="operator == 'bakcellmfs'">Bakcell</a>
+                                            </li>
+                                            <li class="page-item-box"><a class="page-link-style" (click)="switch_operator('narmfs');" [class.active]="operator == 'narmfs'">&nbsp;&nbsp;&nbsp;Nar&nbsp;&nbsp;&nbsp;</a>
+                                            </li>
+                                            <li class="page-item-box"><a class="page-link-style active" (click)="switch_operator('all');" [class.active]="operator == 'all'">&nbsp;&nbsp;&nbsp;Все&nbsp;&nbsp;&nbsp;</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-primary float-right" (click)="emitUpdateData()">Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4" *ngIf="turnover == 'subscriptions'">
+                    <div class="col-lg-12 mb-4 mb-xl-0">
+                        <div
+                            class="bg-light-box roundy section-stat animated bounceInUp"
+                            [hidden]="!is_data_loading && !is_data_search_done">
+                            <div
+                                class="rm-border pb-0 responsive-center card-header">
+                                <h5><span class="style-icon"><mat-icon
+                                    ng-class="font.theme"
+                                    class="step ">today</mat-icon></span>Отчет
+                                    по подпискам
+                                </h5>
+                            </div>
+                            <div class="text-center"
+                                 [hidden]="is_data_search_done">
+                                <app-loading-indicator></app-loading-indicator>
+                            </div>
+                            <div class="panel-body p-4"
+                                 [hidden]="is_data_loading">
+                                <app-grid-subscription-stats
+                                    [update_data]="update_data.asObservable()"
+                                    (data_loaded)="data_loaded($event)"
+                                    (data_reload)="data_reload($event)"
+                                    [period]="period" [operator]="operator"
+                                    [contractors]="selected_contrs"
+                                    [from_period]="from_period"
+                                    [to_period]="to_period">
+                                </app-grid-subscription-stats>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4" *ngIf="turnover == 'payments'">
+                    <div class="col-lg-12 mb-4 mb-xl-0">
+                        <div class="bg-light-box roundy section-stat animated bounceInUp" [hidden]="!is_data_loading && !is_data_search_done">
+                            <div class="rm-border pb-0 responsive-center card-header">
+                                <h5><span class="style-icon"><mat-icon ng-class="font.theme" class="step ">today</mat-icon></span>Отчет
+                                    по платежам
+                                </h5>
+                            </div>
+                            <div class="text-center"
+                                 [hidden]="is_data_search_done">
+                                <app-loading-indicator></app-loading-indicator>
+                            </div>
+                            <div class="panel-body p-4"
+                                 [hidden]="is_data_loading">
+                                <app-grid-payment-stats
+                                    [update_data]="update_data.asObservable()"
+                                    (data_loaded)="data_loaded($event)"
+                                    (data_reload)="data_reload($event)"
+                                    [period]="period" [operator]="operator"
+                                    [contractors]="selected_contrs"
+                                    [from_period]="from_period"
+                                    [to_period]="to_period">
+                                </app-grid-payment-stats>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3 mb-3">
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary btn-sm"
+                                disabled="disabled">Скачать
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+

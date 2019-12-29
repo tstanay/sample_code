@@ -1,0 +1,80 @@
+<div class="container-fluid h-100">
+    <div class="row h-100">
+
+        <div class="right-column login-wrap">
+            <div class="row mx-0 h-100">
+
+
+                <div class="col-md-5 order-md-2 signin-right-column bg-white px-lg-5">
+                    <div class="card-login">
+                        <form>
+                            <div class="card-body">
+                                <h2 class="card-title mb-4">Вход в личный
+                                    кабинет</h2>
+
+                                <div class="form-group mb-4">
+                                    <input matInput placeholder="Логин"
+                                           class="form-control"
+                                           [(ngModel)]="username"
+                                           name="username"
+                                           (focus)="auth_errors=false" required>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <input matInput placeholder="Пароль"
+                                           class="form-control"
+                                           [(ngModel)]="password"
+                                           type="password"
+                                           (focus)="auth_errors=false"
+                                           name="password" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary"
+                                        (click)="login()" color="primary">Вход
+                                </button>
+
+                                <div
+                                    class="form-group mt-4 text-danger animated fadeIn"
+                                    *ngIf="auth_errors">
+                                    Неверный логин или пароль
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="col-md-7 order-md-1 signin-left-column bg-dark px-lg-5">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-10 text-center text-md-left pb-lg-5">
+                            <h2 class="mt-3">
+                                Добро пожаловать в админ панель мобильных
+                                финансовых <br>сервисов
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 mt-lg-5 text-center text-md-left">
+                            <h3 class="pt-5 mb-4">Powered by</h3>
+                            <figure>
+                                <img src="../assets/img/logo_gp_w.png" width="70"
+                                     class="pr-3" alt="">
+                                <img src="../assets/img/logo.white.svg" width="90"
+                                     class="pr-3" alt="">
+                                <!--<img src="../assets/img/pasha_bank_logo.png"-->
+                                     <!--width="70" class="pr-3" alt="">-->
+                                <!--<img src="../assets/img/milli_kart_logo_w.png"-->
+                                     <!--width="70" alt="">-->
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

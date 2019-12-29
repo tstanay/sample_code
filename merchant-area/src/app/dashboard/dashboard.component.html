@@ -1,0 +1,172 @@
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+                 [attr.role]="(isHandset | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset | async)">
+        <div class="navbar-brand text-center" (click)="false" href="/">
+            <span>Главная</span>
+        </div>
+
+        <mat-nav-list>
+            <ul>
+                <li class="nav-item" routerLinkActive="active">
+                    <a mat-list-item routerLink="/dashboard/pulse">
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img class="active-icon" src="../assets/img/pulse.svg" alt="" width="30" height="30">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Пульс</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a mat-list-item routerLink="/dashboard/manage">
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img class="active-icon" src="../assets/img/statictics.svg" alt="" width="30" height="30">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Статистика</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item link-disabled" routerLinkActive="active">
+                    <a mat-list-item>
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img src="../assets/img/merchants.svg" alt="" width="40" height="40">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Мерчанты</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item link-disabled" routerLinkActive="active">
+                    <a mat-list-item>
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img src="../assets/img/documents.svg" alt="" width="30" height="30">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Документы</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item link-disabled" routerLinkActive="active">
+                    <a mat-list-item>
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img src="../assets/img/sverka.svg" alt="" width="50" height="50">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Сверка</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a mat-list-item routerLink="/dashboard/support">
+                        <div class="glyph" ng-repeat="font in fonts"
+                             layout="row">
+                            <div ng-repeat="it in sizes" flex
+                                 layout-align="center center"
+                                 style="text-align: center;" layout="column">
+                                <div flex></div>
+                                <div class="preview-glyphs">
+                                    <img class="active-icon" src="../assets/img/support.svg" alt="" width="30" height="30">
+                                </div>
+                                <div class="preview-scale">
+                                    <span class="step">Поддержка</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </mat-nav-list>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+        <mat-toolbar class="pr-0">
+            <button
+                type="button"
+                mat-icon-button
+                (click)="drawer.toggle()"
+                *ngIf="isHandset | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <div class="container-fluid pr-xl-5">
+                <nav class="navbar navbar-expand pr-0">
+
+                    <ul class="ml-auto float-right navbar-nav">
+                        <li class="dropdown nav-item pr-4">
+                            <a class="nav-link pt-0 pb-0 pl-0 pr-0">
+                                <mat-form-field>
+                                    <select matNativeControl required>
+                                        <option value="RU">RU</option>
+                                        <option value="EN">EN</option>
+                                    </select>
+                                </mat-form-field>
+                            </a>
+
+                            <!--<div class="dropdown-menu dropdown-menu-right">-->
+                                <!--<ul>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<img src="../assets/img/english.svg" alt="" width="30" height="30">-->
+                                            <!--<span>RU</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        </li>
+                        <!--<li class="nav-item pr-4"><a href=""><img class="animate-shake" src="../assets/img/notification.svg" alt="" width="20" height="20"></a></li>-->
+                        <li class="nav-item pr-4"><a><img src="../assets/img/user.svg" alt="" width="30" height="30"></a></li>
+                        <li class="nav-item"><a href="" (click)="logout()"><img src="../assets/img/exit.svg" alt="" width="20" height="20"></a></li>
+                    </ul>
+
+                </nav>
+            </div>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

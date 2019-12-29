@@ -1,0 +1,55 @@
+<div class="page-holder w-100 d-flex flex-wrap">
+    <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-3">
+            <section class="py-2 py-md-2">
+                <div class="row mb-md-3">
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4 mb-xl-0">
+                        <div class="animated fadeIn">
+                            <app-chart init_event="init_transactions_1m" event="transactions_1m" icon="autorenew"
+                                       color="#20c997" title="Транзакций (1 мин)" tooltip_title="Транзакций"
+                                       gradient_url="url(#gradient_transactions_1m)">
+                            </app-chart>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4 mb-xl-0">
+                        <div class="animated fadeIn">
+                            <app-chart init_event="init_turnovers_1m" event="turnovers_1m" icon="donut_large"
+                                       color="#794c8a" title="Оборот (1 мин)" tooltip_title="Оборот" format="money"
+                                       gradient_url="url(#gradient_turnovers_1m)">
+                            </app-chart>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4 mb-xl-0">
+                        <div class="animated fadeIn">
+                            <app-chart init_event="init_turnovers_1h" event="turnovers_1h" icon="donut_large"
+                                       color="#007bff" title="Оборот (1 час)" tooltip_title="Оборот" format="money"
+                                       gradient_url="url(#gradient_turnovers_1h)">
+                            </app-chart>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4 mb-xl-0">
+                        <div class="animated fadeIn">
+                            <app-chart init_event="init_active_users_1m" event="active_users_1m" icon="settings_back"
+                                       color="#dc3545" title="Активные MFS пользователи" tooltip_title="Пользователей"
+                                       gradient_url="url(#gradient_active_users_1m)">
+                            </app-chart>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-md-4">
+                    <div class="col-lg-12 mb-4 mb-xl-0">
+                        <app-charts init_event1="init_transactions_10m" init_event2="init_turnovers_10m"
+                                    event1="transactions_10m" event2="turnovers_10m" icon="touch_app"
+                                    color1="#5daec7" color2="#f7b924" title="Оборот" format2="money"
+                                    tooltip_title1="Транзакций" tooltip_title2="Оборот">
+                        </app-charts>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

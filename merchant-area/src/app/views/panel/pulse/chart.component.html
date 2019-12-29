@@ -1,0 +1,57 @@
+<div class="bg-light-box roundy section-stat">
+
+    <div class="rm-border pb-0 responsive-center card-header">
+        <h5 class="card-title-section" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+            <span class="style-icon text-success">
+                <mat-icon ng-class="font.theme" class="step" [color]="wsService.isConn ? '' : 'warn'"
+                          matRipple matRippleDisabled="true">
+                    {{ icon }}
+                </mat-icon>
+            </span>{{ title }}
+        </h5>
+    </div>
+
+    <div class="m-1">
+        <div style="height: 0">
+           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0" style="visibility: hidden">
+               <defs>
+                   <linearGradient [id]="'gradient_' + event" x1="0%" y1="0%" x2="0%" y2="100%">
+                       <stop offset="0%" style="stop-color: #FFFFFF; stop-opacity: 0.75"/>
+                       <stop offset="100%" [style.stop-color]="color" style="stop-opacity: 0.95"/>
+                   </linearGradient>
+               </defs>
+           </svg>
+       </div>
+
+        <kendo-chart style="height: 205px;" [transitions]="false">
+            <kendo-chart-title color="#f3f4f5" font="2.5rem bold" align="left" margin="0" padding="0"
+                               [text]="this.series[this.series.length - 1].value || '0'">
+            </kendo-chart-title>
+
+            <kendo-chart-axis-defaults [majorGridLines]="{visible: false}">
+            </kendo-chart-axis-defaults>
+
+            <kendo-chart-value-axis>
+                <kendo-chart-value-axis-item [visible]="false" color="#929292"></kendo-chart-value-axis-item>
+            </kendo-chart-value-axis>
+            <kendo-chart-category-axis>
+                <kendo-chart-category-axis-item [visible]="false" color="#929292">
+                </kendo-chart-category-axis-item>
+            </kendo-chart-category-axis>
+
+            <kendo-chart-area background="transparent"></kendo-chart-area>
+
+            <kendo-chart-series>
+                <kendo-chart-series-item [line]="{ style: 'step' }" type="area" [data]="series" [color]="gradient_url">
+                    <kendo-chart-series-item-tooltip [background]="color">
+                        <ng-template kendoChartSeriesTooltipTemplate let-dataItem="dataItem">
+                            <b>{{ dataItem.time }}</b><br>
+                            {{ tooltip_title }}: <b>{{ dataItem.value }}</b><br>
+                        </ng-template>
+                    </kendo-chart-series-item-tooltip>
+                </kendo-chart-series-item>
+            </kendo-chart-series>
+        </kendo-chart>
+    </div>
+
+</div>
